@@ -9,7 +9,7 @@
 <body class="bg-white text-gray-800">
 
 <div class="container mx-auto px-4 py-8">
-    <div class="flex items-center justify-between mb-6">
+    <div class="flex flex-col md:flex-row items-center justify-between mb-6 space-y-4 md:space-y-0">
         <h1 class="text-3xl font-bold text-yellow-900">Produk Kopi SKS</h1>
         <a href="{{ route('products.create') }}"
            class="bg-yellow-900 text-white font-semibold px-5 py-2 rounded-xl shadow hover:bg-yellow-800 transition">
