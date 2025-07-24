@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ isset($product) ? 'Edit' : 'Tambah' }} Produk</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
@@ -60,25 +62,25 @@
         <!-- Upload Gambar -->
         <div class="mb-6">
             <label class="block text-yellow-900 font-semibold mb-1">Gambar Produk</label>
-            
+
             <!-- Tampilkan gambar yang sudah ada (untuk edit) -->
             @if(isset($product) && $product->image)
                 <div class="mb-3">
                     <p class="text-sm text-yellow-700 mb-2">Gambar saat ini:</p>
-                    <img src="{{ asset('storage/' . $product->image) }}" 
-                         alt="{{ $product->name }}" 
+                    <img src="{{ asset('storage/' . $product->image) }}"
+                         alt="{{ $product->name }}"
                          class="h-32 w-32 object-cover rounded-xl shadow-md border border-yellow-200">
                 </div>
             @endif
-            
+
             <input type="file" name="image" id="image" accept="image/*"
                    class="block w-full text-sm text-yellow-900 border border-yellow-300 rounded-xl px-3 py-2 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100 @error('image') border-red-500 @enderror">
             <p class="text-xs text-yellow-600 mt-1">Format: JPG, JPEG, PNG. Maksimal 2MB</p>
-            
+
             @error('image')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
-            
+
             <!-- Preview gambar baru -->
             <div id="image-preview" class="mt-3 hidden">
                 <p class="text-sm text-yellow-700 mb-2">Preview gambar baru:</p>
@@ -106,7 +108,7 @@ document.getElementById('image').addEventListener('change', function(e) {
     const file = e.target.files[0];
     const preview = document.getElementById('image-preview');
     const previewImg = document.getElementById('preview-img');
-    
+
     if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {

@@ -7,7 +7,7 @@ use App\Http\Controllers\AdminProductController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 
 /**

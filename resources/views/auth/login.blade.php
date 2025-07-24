@@ -310,7 +310,7 @@
                     </div>
 
                     <!-- Login Form -->
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login.post') }}">
                         @csrf
 
                         <div class="mb-4">
@@ -326,10 +326,10 @@
                             <div class="relative">
                                 <input type="password" name="password" id="password" placeholder="Password" required
                                     class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-200">
-                                <button type="button" onclick="togglePasswordVisibility(this)"
+                                <span type="button" onclick="togglePasswordVisibility(this)"
                                     class="absolute right-3 top-1/2 transform -translate-y-1/2">
                                     <x-tabler-eye-closed />
-                                </button>
+                                </span>
                             </div>
                             @error('password')
                                 <small class="text-red-800 block">{{ $message }}</small>
@@ -337,16 +337,16 @@
                         </div>
 
                         <div class="flex items-center space-x-2 mb-6">
-                            <input type="checkbox" id="remember" name="remember" value="1"
-                                class="text-yellow-600 focus:ring-yellow-500" {{ old('remember') ? 'checked' : '' }}>
+                            <input type="checkbox" id="remember" name="remember"
+                                class="text-yellow-600 focus:ring-yellow-500" {{ old('remember', false) ? 'checked' : '' }}>
                             <label for="remember" class="text-sm text-gray-700">Remember me</label>
                         </div>
                         @error('remember')
-                                <small class="text-red-800 block">{{ $message }}</small>
+                            <small class="text-red-800 block">{{ $message }}</small>
                         @enderror
 
                         <div class="mb-4">
-                            <button type="submit" id="login-btn"
+                            <button type="submit"
                                 class="w-full py-3 px-4 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-md transition duration-200 flex items-center justify-center">
                                 <span id="btn-text">Login</span>
                             </button>
@@ -392,24 +392,22 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </main>
+@endsection
 
-    @push('scripts')
-        <script>
-            function togglePasswordVisibility(button) {
-                const passwordInput = button.previousElementSibling;
-                const eyeIcon = button;
+@push('scripts')
+    <script>
+        function togglePasswordVisibility(button) {
+            const passwordInput = button.previousElementSibling;
+            const eyeIcon = button;
 
-                if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                    eyeIcon.innerHTML = @js(svg('tabler-eye'));
-                } else {
-                    passwordInput.type = 'password';
-                    eyeIcon.innerHTML = @js(svg('tabler-eye-closed'));
-                }
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerHTML = @js(svg('tabler-eye'));
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerHTML = @js(svg('tabler-eye-closed'));
             }
-        </script>
-    @endpush
-</main>
-
-</html>
+        }
+    </script>
+@endpush

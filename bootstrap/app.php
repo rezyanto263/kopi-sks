@@ -13,9 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->redirectUsersTo(fn () => match(Auth::user()->role) {
-            'user' => '/',
-            'admin' => '/admin/products',
-            default => '/'
+            'user' => route('home'),
+            'admin' => route('products.index'),
+            default => route('home')
         });
     })
     ->withExceptions(function (Exceptions $exceptions): void {

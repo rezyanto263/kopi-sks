@@ -6,7 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules\Password;
+use function GuzzleHttp\default_ca_bundle;
 
 class AuthController extends Controller
 {
@@ -25,15 +27,15 @@ class AuthController extends Controller
         $data = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', Password::min(6)->max(20)->letters()->numbers()],
-            'remember' => ['boolean']
         ]);
 
-        if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']], $data['remember'] ?? false)) {
+        if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']], $request->filled('remember'))) {
             $request->session()->regenerate();
 
             return redirect()->intended(match(Auth::user()->role) {
-                'user' => '/',
-                'admin' => '/admin/products'
+                'user' => route('home'),
+                'admin' => route('products.index'),
+                default => route('home')
             });
         }
 
@@ -70,11 +72,8 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
+        Session::invalidate();
+        Session::regenerateToken();
         return redirect('/');
     }
 }
