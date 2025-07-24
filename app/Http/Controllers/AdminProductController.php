@@ -25,6 +25,7 @@ class AdminProductController extends Controller
         'name' => 'required',
         'price' => 'required|numeric',
         'stock' => 'required|integer',
+        'description' => 'required',
         'status' => 'required',
         'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
     ]);
@@ -52,6 +53,7 @@ class AdminProductController extends Controller
         'name' => 'required',
         'price' => 'required|numeric',
         'stock' => 'required|integer',
+        'description' => 'required',
         'status' => 'required',
         'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
     ]);
@@ -63,11 +65,11 @@ class AdminProductController extends Controller
         if ($product->image && Storage::disk('public')->exists($product->image)) {
             Storage::disk('public')->delete($product->image);
         }
-        
+
         $data['image'] = $request->file('image')->store('images', 'public');
     } else {
         // Jika tidak ada file baru diupload, pertahankan gambar lama
-        unset($data['image']); 
+        unset($data['image']);
     }
 
     $product->update($data);

@@ -25,10 +25,13 @@
                 </a>
 
                 <!-- Tombol Logout -->
-                <a href="{{ route('logout') }}"
-                    class="bg-red-600 text-white font-semibold px-5 py-2 rounded-xl shadow hover:bg-red-700 transition">
-                    Logout
-                </a>
+                <form action="{{ route('logout') }}" method="POST" class="inline-block">
+                    @csrf
+                    <button type="submit"
+                        class="bg-red-600 text-white font-semibold px-5 py-2 rounded-xl shadow hover:bg-red-700 transition">
+                        Logout
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -46,6 +49,7 @@
                         <th class="px-5 py-3">ID</th>
                         <th class="px-5 py-3">Gambar</th>
                         <th class="px-5 py-3">Nama</th>
+                        <th class="px-5 py-3">Description</th>
                         <th class="px-5 py-3">Harga</th>
                         <th class="px-5 py-3">Stok</th>
                         <th class="px-5 py-3">Status</th>
@@ -65,6 +69,7 @@
                                 @endif
                             </td>
                             <td class="px-5 py-3">{{ $product->name }}</td>
+                            <td class="px-5 py-3">{{ $product->description }}</td>
                             <td class="px-5 py-3">Rp{{ number_format($product->price, 0, ',', '.') }}</td>
                             <td class="px-5 py-3">{{ $product->stock }}</td>
                             <td class="px-5 py-3">{{ $product->status }}</td>

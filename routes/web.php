@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminProductController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [ProductController::class, 'index'])->name('home');
 
 
 /**
@@ -20,19 +20,24 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 });
 
+Route::middleware('auth')->post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 /**
  * Authenticated User Routes
  */
-Route::middleware('auth')->group(function () {
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::middleware(['auth', 'role:user'])->group(function () {
+
+    Route::get('/profile', [UserProfileController::class, 'show'])->name('profile.show');
+    Route::put('/profile', [UserProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/products/{product}', [ProductController::class, 'showProductDetailView'])->name('products.detail');
 });
 
 
 /**
  * Authenticated Admin Routes
  */
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/products', [AdminProductController::class, 'index'])->name('products.index');
     Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('products.create');
     Route::post('/admin/products', [AdminProductController::class, 'store'])->name('products.store');
