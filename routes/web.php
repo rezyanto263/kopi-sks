@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminProductController;
+use App\Models\Product;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -10,7 +13,7 @@ Route::get('/', function () {
 /**
  * Unauthenticated Routes
  */
-Route::middleware('guest')->group(function() {
+Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -19,8 +22,26 @@ Route::middleware('guest')->group(function() {
 
 
 /**
- * Authenticated Routes
+ * Authenticated User Routes
  */
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+
+/**
+ * Authenticated Admin Routes
+ */
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/products', function () {
+        $products = Product::all();
+        return view('admin.products', compact('products'));
+    });
+
+    Route::get('/admin/products', [AdminProductController::class, 'index'])->name('products.index');
+    Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('products.create');
+    Route::post('/admin/products', [AdminProductController::class, 'store'])->name('products.store');
+    Route::get('/admin/products/{product}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+    Route::put('/admin/products/{product}', [AdminProductController::class, 'update'])->name('products.update');
+    Route::delete('/admin/products/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
 });
