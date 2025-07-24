@@ -16,9 +16,11 @@
                 <a href="#tentang" class="text-white hover:text-yellow-300">Tentang</a>
                 <a href="#kontak" class="text-white hover:text-yellow-300">Kontak</a>
             </nav>
-            <a href="/login" class="bg-yellow-400 hover:bg-yellow-500 text-[#4E342E] font-semibold px-5 py-2 rounded-full shadow">
+            @guest
+            <a href="{{ route('login') }}" class="bg-yellow-400 hover:bg-yellow-500 text-[#4E342E] font-semibold px-5 py-2 rounded-full shadow">
                 Login
             </a>
+            @endguest
         </div>
     </header>
 

@@ -25,13 +25,16 @@ class AuthController extends Controller
         $data = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', Password::min(6)->max(20)->letters()->numbers()],
-            'remember' => ['nullable', 'boolean']
+            'remember' => ['boolean']
         ]);
 
         if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']], $data['remember'] ?? false)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            return redirect()->intended(match(Auth::user()->role) {
+                'user' => '/',
+                'admin' => '/admin/products'
+            });
         }
 
         return back()->withErrors(['status' => 'The provided credentials do not match our records.']);

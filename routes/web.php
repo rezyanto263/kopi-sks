@@ -33,11 +33,6 @@ Route::middleware('auth')->group(function () {
  * Authenticated Admin Routes
  */
 Route::middleware('auth')->group(function () {
-    Route::get('/admin/products', function () {
-        $products = Product::all();
-        return view('admin.products', compact('products'));
-    });
-
     Route::get('/admin/products', [AdminProductController::class, 'index'])->name('products.index');
     Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('products.create');
     Route::post('/admin/products', [AdminProductController::class, 'store'])->name('products.store');

@@ -310,7 +310,7 @@
                     </div>
 
                     <!-- Login Form -->
-                    <form method="POST" action="{{ route('login.post') }}">
+                    <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="mb-4">
@@ -337,10 +337,13 @@
                         </div>
 
                         <div class="flex items-center space-x-2 mb-6">
-                            <input type="checkbox" id="remember" name="remember"
+                            <input type="checkbox" id="remember" name="remember" value="1"
                                 class="text-yellow-600 focus:ring-yellow-500" {{ old('remember') ? 'checked' : '' }}>
                             <label for="remember" class="text-sm text-gray-700">Remember me</label>
                         </div>
+                        @error('remember')
+                                <small class="text-red-800 block">{{ $message }}</small>
+                        @enderror
 
                         <div class="mb-4">
                             <button type="submit" id="login-btn"
