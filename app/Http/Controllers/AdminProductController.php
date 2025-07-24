@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class AdminProductController extends Controller
 {
@@ -58,7 +59,15 @@ class AdminProductController extends Controller
     $data = $request->all();
 
     if ($request->hasFile('image')) {
+        // Hapus gambar lama jika ada
+        if ($product->image && Storage::disk('public')->exists($product->image)) {
+            Storage::disk('public')->delete($product->image);
+        }
+        
         $data['image'] = $request->file('image')->store('images', 'public');
+    } else {
+        // Jika tidak ada file baru diupload, pertahankan gambar lama
+        unset($data['image']); 
     }
 
     $product->update($data);

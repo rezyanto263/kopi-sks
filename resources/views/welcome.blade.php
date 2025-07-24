@@ -40,7 +40,7 @@
     </div>
 </section>
 
-    {{-- ✅ PRODUK --}}
+    {{--PRODUK --}}
     <section id="produk" class="py-16 bg-white">
         <div class="max-w-6xl mx-auto px-4">
             <h3 class="text-3xl font-bold text-center mb-12 text-[#4E342E]">Produk Kami</h3>
@@ -64,7 +64,7 @@
         </div>
     </section>
 
-    {{-- ✅ TENTANG --}}
+    {{--TENTANG --}}
     <section id="tentang" class="py-16 bg-[#f8f5f2]">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <h3 class="text-3xl font-bold text-[#4E342E] mb-6">Tentang Kami</h3>
@@ -74,7 +74,7 @@
         </div>
     </section>
 
-    {{-- ✅ KONTAK --}}
+    {{-- KONTAK --}}
     <section id="kontak" class="py-16 bg-white">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <h3 class="text-3xl font-bold text-[#4E342E] mb-6">Hubungi Kami</h3>
@@ -84,7 +84,7 @@
         </div>
     </section>
 
-    {{-- ✅ FOOTER --}}
+    {{-- FOOTER --}}
     <footer class="bg-[#4E342E] text-white text-center py-5">
         <p>&copy; {{ now()->year }} Kopi SKS. Seluruh hak cipta dilindungi.</p>
     </footer>
