@@ -1,7 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminProductController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+use App\Models\Product;
+
+Route::get('/admin/products', function () {
+    $products = Product::all();
+    return view('admin.products', compact('products'));
+});
+
+
+Route::get('/admin/products', [AdminProductController::class, 'index'])->name('products.index');
+Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('products.create');
+Route::post('/admin/products', [AdminProductController::class, 'store'])->name('products.store');
+Route::get('/admin/products/{product}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+Route::put('/admin/products/{product}', [AdminProductController::class, 'update'])->name('products.update');
+Route::delete('/admin/products/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
+
