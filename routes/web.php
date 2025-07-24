@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminProductController;
+use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', function () {
@@ -23,6 +24,7 @@ Route::post('/admin/products', [AdminProductController::class, 'store'])->name('
 Route::get('/admin/products/{product}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
 Route::put('/admin/products/{product}', [AdminProductController::class, 'update'])->name('products.update');
 Route::delete('/admin/products/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
+Route::post('/logout', [AuthController::class, 'showLoginForm'])->name('logout');
 
 Route::middleware('guest')->group(function() {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');

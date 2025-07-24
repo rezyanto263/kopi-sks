@@ -15,14 +15,13 @@
            class="bg-yellow-900 text-white font-semibold px-5 py-2 rounded-xl shadow hover:bg-yellow-800 transition">
             Tambah Produk
         </a>
+        <form action="{{ route('logout') }}" method="POST" class="inline-block">
+                @csrf
+                <button type="submit" class="bg-red-600 text-white font-semibold px-5 py-2 rounded-xl shadow hover:bg-red-700 transition">
+                    Logout
+                </button>
+        </form>
     </div>
-
-    <!-- Tampilkan pesan sukses -->
-    @if(session('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl mb-6">
-            {{ session('success') }}
-        </div>
-    @endif
 
     <div class="overflow-x-auto bg-white border border-yellow-200 shadow-md rounded-xl">
         <table class="min-w-full text-left">
