@@ -24,8 +24,12 @@ class UserProfileController extends Controller
 
         if ($request->hasFile('picture')) {
             $path = $request->file('picture')->store('pictures', 'public');
-            session(['picture' => asset('storage/' . $path)]); // simpan sementara
         }
+
+        Auth::user()->update([
+            'picture' => asset('storage/' . $path)
+        ]);
+
 
         return redirect()->route('profile.show')->with('success', 'Profil berhasil diperbarui.');
     }

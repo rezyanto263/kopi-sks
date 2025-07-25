@@ -31,7 +31,7 @@
                 </p>
 
                 <div class="text-3xl font-bold text-yellow-400 mb-2">
-                    Rp 45.000
+                    Rp {{ number_format($product['price']) }}
                 </div>
 
                 <p class="text-sm text-amber-200 mb-6">
