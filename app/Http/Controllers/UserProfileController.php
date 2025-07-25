@@ -11,7 +11,6 @@ class UserProfileController extends Controller
     public function show()
     {
         $user = Auth::user();
-
         return view('user.profile', compact('user'));
     }
 
@@ -24,12 +23,10 @@ class UserProfileController extends Controller
 
         if ($request->hasFile('picture')) {
             $path = $request->file('picture')->store('pictures', 'public');
+            Auth::user()->update([
+                'picture' => asset('storage/' . $path)
+            ]);
         }
-
-        Auth::user()->update([
-            'picture' => asset('storage/' . $path)
-        ]);
-
 
         return redirect()->route('profile.show')->with('success', 'Profil berhasil diperbarui.');
     }
