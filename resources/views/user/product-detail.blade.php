@@ -14,7 +14,7 @@
             <!-- Gambar Produk -->
             <div>
                 <img src="{{ asset('storage/' . $product['image']) }}"
-                     alt="Kopi Arabika Gayo"
+                     alt="{{ $product['name'] }}"
                      class="w-full h-auto rounded-3xl shadow-lg ring-2 ring-amber-700">
             </div>
 

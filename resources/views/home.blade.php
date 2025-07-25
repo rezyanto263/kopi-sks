@@ -33,7 +33,7 @@
                 <div class="bg-gradient-to-b from-amber-50 to-white rounded-2xl shadow-lg hover:shadow-2xl
                             hover:ring-2 hover:ring-yellow-300/50 transition-all duration-300 ease-in-out
                             transform hover:scale-105 flex flex-col overflow-hidden text-[#963C00]">
-                    <img src="{{ $product['image'] }}" alt="{{ $product['name'] }}"
+                    <img src="{{ asset('storage/' . $product['image']) }}" alt="{{ $product['name'] }}"
                          class="w-full h-48 object-cover rounded-t-2xl" />
                     <div class="p-5 flex flex-col flex-grow">
                         <h3 class="text-xl font-semibold mb-4">{{ $product['name'] }}</h3>

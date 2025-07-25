@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>@yield('title', 'KOPI SKS')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="webicon" href="{{ asset('storage/images/logo.jpg') }}">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="relative bg-gradient-to-br from-amber-50 via-white to-amber-100 min-h-screen text-[#5e2400] font-sans overflow-x-hidden">
