@@ -43,6 +43,9 @@
                         <input type="text" name="name" value="{{ old('name', $user['name']) }}"
                             class="w-full px-4 py-2 rounded-lg bg-white text-amber-900 border border-yellow-300 focus:ring-2 focus:ring-yellow-400 shadow-md"
                             required>
+                        @error('name')
+                            <small class="text-red-800 block">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     <!-- Upload Foto  -->
@@ -51,6 +54,9 @@
                             Profil</label>
                         <input type="file" name="picture" accept="image/*"
                             class="w-full px-4 py-2 bg-white text-amber-800 border border-yellow-300 rounded-lg focus:ring-2 focus:ring-yellow-400 shadow">
+                        @error('picture')
+                            <small class="text-red-800 block">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     <!-- Tombol -->

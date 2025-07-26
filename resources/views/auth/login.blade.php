@@ -318,7 +318,7 @@
                                 value="{{ old('email') }}"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-200 @error('email') input-error @enderror">
                             @error('email')
-                                <small class="text-red-800 block">{{ $message }}</small>
+                                <small class="text-red-600 block">{{ $message }}</small>
                             @enderror
                         </div>
 
@@ -332,7 +332,7 @@
                                 </span>
                             </div>
                             @error('password')
-                                <small class="text-red-800 block">{{ $message }}</small>
+                                <small class="text-red-600 block">{{ $message }}</small>
                             @enderror
                         </div>
 
